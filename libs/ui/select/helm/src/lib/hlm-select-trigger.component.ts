@@ -1,10 +1,37 @@
-import { Component, computed, ContentChild, ElementRef, Input, signal, ViewChild } from '@angular/core';
+import {
+	Component,
+	computed,
+	ContentChild,
+	Directive,
+	ElementRef,
+	inject,
+	Input,
+	signal,
+	TemplateRef,
+	ViewChild,
+} from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronsUpDown } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BrnSelectTriggerDirective } from '@spartan-ng/ui-select-brain';
+import { BrnSelectTriggerDirective, BrnSelectTriggerEleDirective } from '@spartan-ng/ui-select-brain';
 import { ClassValue } from 'clsx';
+
+@Directive({
+	selector: 'ng-template[hlmSelectTriggerEle]',
+	standalone: true,
+	providers: [
+		{
+			provide: BrnSelectTriggerEleDirective,
+			useExisting: HlmSelectTriggerDirective,
+		},
+	],
+})
+export class HlmSelectTriggerDirective extends BrnSelectTriggerEleDirective {
+	constructor() {
+		super(inject(TemplateRef));
+	}
+}
 
 @Component({
 	selector: 'hlm-select-trigger',

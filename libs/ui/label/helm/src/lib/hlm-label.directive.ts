@@ -30,7 +30,7 @@ export const labelVariants = cva(
 export type LabelVariants = VariantProps<typeof labelVariants>;
 
 @Directive({
-	selector: '[hlmLabel]',
+	selector: 'ng-template[hlmLabel]',
 	standalone: true,
 	hostDirectives: [
 		{

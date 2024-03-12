@@ -1,16 +1,18 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Directive, ElementRef, inject, Input, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { Directive, ElementRef, inject, Input, OnInit, PLATFORM_ID, signal, TemplateRef } from '@angular/core';
 
 let nextId = 0;
 
 @Directive({
-	selector: '[brnLabel]',
+	selector: 'ng-template[brnLabel]',
 	standalone: true,
 	host: {
 		'[id]': '_id()',
 	},
 })
 export class BrnLabelDirective implements OnInit {
+	constructor(public readonly templateRef: TemplateRef<unknown>) {}
+
 	protected readonly _id = signal(`brn-label-${nextId++}`);
 
 	@Input()

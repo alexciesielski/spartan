@@ -1,5 +1,10 @@
-import { computed, Directive, ElementRef, inject } from '@angular/core';
+import { computed, Directive, ElementRef, inject, TemplateRef } from '@angular/core';
 import { BrnSelectService } from './brn-select.service';
+
+@Directive({ selector: 'ng-template[brnSelectTriggerEle]', standalone: true })
+export class BrnSelectTriggerEleDirective {
+	constructor(public templateRef: TemplateRef<unknown>) {}
+}
 
 @Directive({
 	selector: '[brnSelectTrigger]',

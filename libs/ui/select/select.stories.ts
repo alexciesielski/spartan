@@ -31,11 +31,14 @@ export const Default: Story = {
 		props: { ...args },
 		template: `
 		<hlm-select class="inline-block" ${argsToTemplate(args)}>
-			<hlm-select-trigger class='w-56'>
-				<hlm-select-value />
-			</hlm-select-trigger>
+			
+			<ng-template hlmSelectTriggerEle>
+				<hlm-select-trigger class='w-56'>
+					<hlm-select-value />
+				</hlm-select-trigger>
+			</ng-template>
 			<hlm-select-content class="w-56">
-				<hlm-select-label>Fruits</hlm-select-label>
+				
 				<hlm-option value="apple">Apple</hlm-option>
 				<hlm-option value="banana">Banana</hlm-option>
 				<hlm-option value="blueberry">Blueberry</hlm-option>
@@ -55,9 +58,9 @@ export const ReactiveFormControl: Story = {
 		</div>
     	<form [formGroup]="fruitGroup">
 			<brn-select class='w-56' ${argsToTemplate(args)} formControlName="fruit" placeholder="Select a Fruit">
-				<hlm-select-trigger>
+				<ng-template hlm-select-trigger>
 					<brn-select-value hlm />
-				</hlm-select-trigger>
+				</ng-template >
 				<hlm-select-content class="w-56">
 					<hlm-select-label>Fruits</hlm-select-label>
 					<hlm-option value="apple">Apple</hlm-option>

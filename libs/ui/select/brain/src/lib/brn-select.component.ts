@@ -1,5 +1,6 @@
 import { CdkListbox, CdkListboxModule } from '@angular/cdk/listbox';
 import { CdkConnectedOverlay, ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import {
 	AfterContentInit,
 	ChangeDetectionStrategy,
@@ -21,7 +22,7 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
-import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
+import { BrnSelectTriggerDirective, BrnSelectTriggerEleDirective } from './brn-select-trigger.directive';
 import { BrnSelectService } from './brn-select.service';
 
 export type BrnReadDirection = 'ltr' | 'rtl';
@@ -31,18 +32,20 @@ let nextId = 0;
 @Component({
 	selector: 'brn-select, hlm-select',
 	standalone: true,
-	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule],
+	imports: [OverlayModule, BrnSelectTriggerDirective, CdkListboxModule, NgTemplateOutlet],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [BrnSelectService, CdkListbox],
 	template: `
 		@if (!labelProvided() && _placeholder()) {
 			<label class="hidden" [attr.id]="backupLabelId()">{{ _placeholder() }}</label>
 		} @else {
-			<ng-content select="label[hlmLabel],label[brnLabel]" />
+			<!-- <ng-content select="label[hlmLabel],label[brnLabel]" /> -->
+			<!-- <ng-container *ngTemplateOutlet="selectLabel.templateRef" /> -->
 		}
 
 		<div cdk-overlay-origin (click)="toggle()" #trigger="cdkOverlayOrigin">
-			<ng-content select="hlm-select-trigger,[brnSelectTrigger]" />
+			<!-- <ng-content select="hlm-select-trigger,[brnSelectTrigger]" /> -->
+			<ng-container *ngTemplateOutlet="selectTriggerEle?.templateRef" />
 		</div>
 		<ng-template
 			cdk-connected-overlay
@@ -86,6 +89,10 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	dir = input<BrnReadDirection>('ltr');
 
+	@ContentChild(BrnSelectTriggerEleDirective, { descendants: false, read: BrnSelectTriggerEleDirective })
+	protected selectTriggerEle!: BrnSelectTriggerEleDirective;
+	@ContentChild(BrnSelectTriggerDirective, { descendants: false })
+	protected selectTrigger!: BrnSelectTriggerDirective;
 	@ContentChild(BrnLabelDirective, { descendants: false })
 	protected selectLabel!: BrnLabelDirective;
 	/** Overlay pane containing the options. */
