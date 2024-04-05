@@ -35,7 +35,7 @@ import { BrnLabelDirective } from '@spartan-ng/ui-label-brain';
 import { Subject, delay, map, of, skip, switchMap } from 'rxjs';
 import { BrnSelectContentComponent } from './brn-select-content.component';
 import { BrnSelectOptionDirective } from './brn-select-option.directive';
-import { BrnSelectTriggerDirective, BrnSelectTriggerEleDirective } from './brn-select-trigger.directive';
+import { BrnSelectTriggerDirective } from './brn-select-trigger.directive';
 import { BrnSelectService } from './brn-select.service';
 
 export type BrnReadDirection = 'ltr' | 'rtl';
@@ -63,7 +63,7 @@ let nextId = 0;
 
 		<div cdk-overlay-origin (click)="toggle()" #trigger="cdkOverlayOrigin">
 			<!-- <ng-content select="hlm-select-trigger,[brnSelectTrigger]" /> -->
-			<ng-container *ngTemplateOutlet="selectTriggerEle?.templateRef" />
+			<ng-container *ngTemplateOutlet="selectTrigger?.templateRef ?? null" />
 		</div>
 		<ng-template
 			cdk-connected-overlay
@@ -110,8 +110,6 @@ export class BrnSelectComponent implements ControlValueAccessor, AfterContentIni
 
 	public readonly dir = input<BrnReadDirection>('ltr');
 
-	@ContentChild(BrnSelectTriggerEleDirective, { descendants: false, read: BrnSelectTriggerEleDirective })
-	protected selectTriggerEle!: BrnSelectTriggerEleDirective;
 	@ContentChild(BrnSelectTriggerDirective, { descendants: false })
 	protected selectTrigger!: BrnSelectTriggerDirective;
 	@ContentChild(BrnLabelDirective, { descendants: false })

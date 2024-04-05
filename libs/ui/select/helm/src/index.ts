@@ -5,7 +5,7 @@ import { HlmSelectLabelDirective } from './lib/hlm-select-label.directive';
 import { HlmSelectOptionComponent } from './lib/hlm-select-option.component';
 import { HlmSelectScrollDownComponent } from './lib/hlm-select-scroll-down.component';
 import { HlmSelectScrollUpComponent } from './lib/hlm-select-scroll-up.component';
-import { HlmSelectTriggerComponent, HlmSelectTriggerDirective } from './lib/hlm-select-trigger.component';
+import { HlmSelectTriggerComponent } from './lib/hlm-select-trigger.component';
 import { HlmSelectValueDirective } from './lib/hlm-select-value.directive';
 import { HlmSelectDirective } from './lib/hlm-select.directive';
 
@@ -22,7 +22,6 @@ export * from './lib/hlm-select.directive';
 export const HlmSelectImports = [
 	HlmSelectContentDirective,
 	HlmSelectTriggerComponent,
-	HlmSelectTriggerDirective,
 	HlmSelectOptionComponent,
 	HlmSelectValueDirective,
 	HlmSelectDirective,

@@ -42,9 +42,7 @@ export const Default: Story = {
 		template: /* HTML */ `
 			<hlm-select class="inline-block" ${argsToTemplate(args, { exclude: ['initialValue'] })}>
 				<hlm-select-trigger class="w-56">
-					<ng-template hlm-select-trigger>
-						<hlm-select-value />
-					</ng-template>
+					<hlm-select-value />
 				</hlm-select-trigger>
 				<hlm-select-content>
 					<hlm-select-label>Fruits</hlm-select-label>
@@ -68,11 +66,9 @@ export const ReactiveFormControl: Story = {
 			</div>
 			<form [formGroup]="fruitGroup">
 				<brn-select class="w-56" ${argsToTemplate(args, { exclude: ['initialValue'] })} formControlName="fruit">
-					<hlm-select-trigger>
-						<ng-template hlm-select-trigger>
-							<brn-select-value hlm />
-						</ng-template>
-					</hlm-select-trigger>
+					<ng-template hlm-select-trigger>
+						<brn-select-value hlm />
+					</ng-template>
 					<hlm-select-content>
 						<hlm-select-label>Fruits</hlm-select-label>
 						<hlm-option value="apple">Apple</hlm-option>

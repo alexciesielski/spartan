@@ -1,42 +1,22 @@
-import {
-	Component,
-	computed,
-	ContentChild,
-	Directive,
-	ElementRef,
-	inject,
-	input,
-	TemplateRef,
-	ViewChild,
-} from '@angular/core';
+import { Component, computed, ContentChild, ElementRef, input, ViewChild } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
 import { hlm } from '@spartan-ng/ui-core';
 import { HlmIconComponent } from '@spartan-ng/ui-icon-helm';
-import { BrnSelectTriggerDirective, BrnSelectTriggerEleDirective } from '@spartan-ng/ui-select-brain';
+import { BrnSelectTriggerDirective } from '@spartan-ng/ui-select-brain';
 import { ClassValue } from 'clsx';
-
-@Directive({
-	selector: 'ng-template[hlmSelectTriggerEle]',
-	standalone: true,
-	providers: [
-		{
-			provide: BrnSelectTriggerEleDirective,
-			useExisting: HlmSelectTriggerDirective,
-		},
-	],
-})
-export class HlmSelectTriggerDirective extends BrnSelectTriggerEleDirective {
-	constructor() {
-		super(inject(TemplateRef));
-	}
-}
 
 @Component({
 	selector: 'hlm-select-trigger',
 	standalone: true,
 	imports: [BrnSelectTriggerDirective, HlmIconComponent],
-	providers: [provideIcons({ lucideChevronDown })],
+	providers: [
+		provideIcons({ lucideChevronDown }),
+		{
+			provide: BrnSelectTriggerDirective,
+			useExisting: HlmSelectTriggerComponent,
+		},
+	],
 	template: `
 		<button [class]="_computedClass()" #button brnSelectTrigger type="button">
 			<ng-content />

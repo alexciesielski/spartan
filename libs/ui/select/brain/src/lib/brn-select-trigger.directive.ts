@@ -2,11 +2,6 @@ import { AfterViewInit, computed, Directive, ElementRef, inject, TemplateRef } f
 import { NgControl } from '@angular/forms';
 import { BrnSelectService } from './brn-select.service';
 
-@Directive({ selector: 'ng-template[brnSelectTriggerEle]', standalone: true })
-export class BrnSelectTriggerEleDirective {
-	constructor(public templateRef: TemplateRef<unknown>) {}
-}
-
 @Directive({
 	selector: '[brnSelectTrigger]',
 	standalone: true,
@@ -29,6 +24,7 @@ export class BrnSelectTriggerEleDirective {
 	},
 })
 export class BrnSelectTriggerDirective implements AfterViewInit {
+	public readonly templateRef = inject(TemplateRef);
 	private readonly el = inject(ElementRef);
 	protected readonly _selectService = inject(BrnSelectService);
 	protected readonly _ngControl = inject(NgControl, { optional: true });
